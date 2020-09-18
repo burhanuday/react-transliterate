@@ -5185,11 +5185,6 @@ get-caller-file@^2.0.1:
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
 
-get-input-selection@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/get-input-selection/-/get-input-selection-1.1.4.tgz#2c622bbd994f8d7f8d6bfb60d634cc73ee775a81"
-  integrity sha1-LGIrvZlPjX+Na/tg1jTMc+53WoE=
-
 get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.2.tgz#b5fde77f22cbe35f390b4e089922c50bce6ef664"
