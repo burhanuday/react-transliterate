@@ -1,9 +1,24 @@
-/* add css module styles here (optional) */
+.ReactTransliterate {
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  display: block;
+  font-size: 14px;
+  list-style: none;
+  padding: 1px;
+  position: absolute;
+  text-align: left;
+  z-index: 20000;
+}
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
-  text-align: center;
+.ReactTransliterate > li {
+  cursor: pointer;
+  padding: 10px;
+  min-width: 100px;
+}
+
+.Active {
+  background-color: #65c3d7;
+  color: #fff;
 }
