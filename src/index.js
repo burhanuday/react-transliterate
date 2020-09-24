@@ -21,13 +21,16 @@ export const ReactTransliterate = ({
   lang = "hi",
   offsetX = 0,
   offsetY = 0,
-  value,
   onChange,
+  onKeyDown = () => {},
 }) => {
   const [options, setOptions] = useState([]);
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const [selection, setSelection] = useState(0);
+  const [value, setValue] = useState("");
+  const [matchStart, setMatchStart] = useState(-1);
+  const [matchEnd, setMatchEnd] = useState(-1);
   const inputRef = useRef(null);
 
   const getSuggestions = async (lastWord) => {
@@ -47,12 +50,28 @@ export const ReactTransliterate = ({
 
   const handleChange = (e) => {
     const value = e.target.value;
-    const lastWord = value.slice(value.lastIndexOf(" ") + 1);
+    setValue(value);
+
+    // get the current index of the cursor
+    const caret = getInputSelection(e.target).end;
+    const input = inputRef.current;
+    const caretPos = getCaretCoordinates(input, caret);
+
+    // search for the last occurence of the space character from
+    // the cursor
+    const indexOfLastSpace = value.lastIndexOf(" ", caret - 1);
+
+    // first character of the currently being typed word is
+    // one character after the space character
+    // index of last character is one before the current position
+    // of the caret
+    setMatchStart(indexOfLastSpace + 1);
+    setMatchEnd(caret - 1);
+
+    const lastWord = value.slice(indexOfLastSpace + 1, caret);
     if (lastWord) {
       getSuggestions(lastWord);
-      const caret = getInputSelection(e.target).end;
-      const input = inputRef.current;
-      const caretPos = getCaretCoordinates(input, caret);
+
       const rect = input.getBoundingClientRect();
 
       const top = caretPos.top + input.offsetTop;
@@ -64,12 +83,58 @@ export const ReactTransliterate = ({
       setTop(top);
       setLeft(left);
     } else {
-      setOptions([]);
+      reset();
     }
   };
-  const handleKeyDown = () => {};
+
+  const handleKeyDown = (event) => {
+    const helperVisible = options.length > 0;
+
+    if (helperVisible) {
+      switch (event.keyCode) {
+        case KEY_ESCAPE:
+          event.preventDefault();
+          reset();
+          break;
+        case KEY_UP:
+          event.preventDefault();
+          setSelection((options.length + selection - 1) % options.length);
+          break;
+        case KEY_DOWN:
+          event.preventDefault();
+          setSelection((selection + 1) % options.length);
+          break;
+        case KEY_ENTER:
+        case KEY_RETURN:
+        case KEY_TAB:
+          event.preventDefault();
+          handleSelection(selection);
+          break;
+        default:
+          onKeyDown(event);
+          break;
+      }
+    } else {
+      onKeyDown(event);
+    }
+  };
+
   const handleResize = () => {};
-  const handleSelection = (index) => {};
+  const handleSelection = (index) => {
+    const currentString = value;
+    const newValue =
+      currentString.substr(0, matchStart) +
+      options[index] +
+      currentString.substr(matchEnd + 1, currentString.length);
+    setCaretPosition(inputRef.current, matchStart);
+    setValue(newValue);
+    reset();
+  };
+
+  const reset = () => {
+    setSelection(0);
+    setOptions([]);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -91,6 +156,7 @@ export const ReactTransliterate = ({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         ref={inputRef}
+        value={value}
       />
       <ul
         style={{
