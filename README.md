@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+![Demo gif](./assets/demo.gif)
+
+[See Demo](https://burhanuday.tech/react-transliterate/)
+
 ## Install
 
 ```bash
