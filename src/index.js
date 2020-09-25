@@ -15,20 +15,19 @@ const OPTION_LIST_MIN_WIDTH = 100;
 
 export const ReactTransliterate = ({
   Component = "input",
-  defaultValue,
   onBlur,
   disabled,
   lang = "hi",
   offsetX = 0,
   offsetY = 0,
   onChange,
+  value,
   onKeyDown = () => {},
 }) => {
   const [options, setOptions] = useState([]);
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const [selection, setSelection] = useState(0);
-  const [value, setValue] = useState("");
   const [matchStart, setMatchStart] = useState(-1);
   const [matchEnd, setMatchEnd] = useState(-1);
   const inputRef = useRef(null);
@@ -50,7 +49,7 @@ export const ReactTransliterate = ({
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setValue(value);
+    onChange(e);
 
     // get the current index of the cursor
     const caret = getInputSelection(e.target).end;
@@ -132,7 +131,8 @@ export const ReactTransliterate = ({
       " " +
       currentString.substr(matchEnd + 1, currentString.length);
     setCaretPosition(inputRef.current, matchStart);
-    setValue(newValue);
+    const e = { target: { value: newValue } };
+    onChange(e);
     reset();
   };
 
