@@ -1,10 +1,15 @@
 {
   "name": "react-transliterate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transliterate component for React",
   "author": "burhanuday",
   "license": "MIT",
   "repository": "burhanuday/react-transliterate",
+  "keywords": [
+    "react",
+    "transliterate",
+    "english to hindi"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
