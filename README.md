@@ -45,8 +45,8 @@ export default App;
 
 | Props     | Required? | Default | Description                                                                                         |
 | --------- | --------- | ------- | --------------------------------------------------------------------------------------------------- |
-| onChange  | Yes       |         | onChange function to pass to the component. Return the event from the component                     |
-| value     | Yes       |         | value prop to pass to the component                                                                 |
+| onChange  | Yes       |         | `onChange` function to pass to the component. Returns the event from the component                  |
+| value     | Yes       |         | `value` prop to pass to the component                                                               |
 | Component |           | input   | Component to render. You can pass components from your component library as this prop               |
 | lang      |           | hi      | Language you want to transliterate. Tested languages are `hi`, `mr`, `ur`. More languages to follow |
 | offsetY   |           | 0       | Extra space between the top of the helper and bottom of the caret                                   |
