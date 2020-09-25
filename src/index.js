@@ -68,12 +68,16 @@ export const ReactTransliterate = ({
     setMatchStart(indexOfLastSpace + 1);
     setMatchEnd(caret - 1);
 
-    const lastWord = value.slice(indexOfLastSpace + 1, caret);
-    if (lastWord) {
-      getSuggestions(lastWord);
+    // currentWord is the word that is being typed
+    const currentWord = value.slice(indexOfLastSpace + 1, caret);
+    if (currentWord) {
+      // make an api call to fetch suggestions
+      getSuggestions(currentWord);
 
       const rect = input.getBoundingClientRect();
 
+      // get the position of the top left corner of the suggestion box
+      // and save it to state
       const top = caretPos.top + input.offsetTop;
       const left = Math.min(
         caretPos.left + input.offsetLeft - OPTION_LIST_Y_OFFSET,
@@ -125,6 +129,7 @@ export const ReactTransliterate = ({
     const newValue =
       currentString.substr(0, matchStart) +
       options[index] +
+      " " +
       currentString.substr(matchEnd + 1, currentString.length);
     setCaretPosition(inputRef.current, matchStart);
     setValue(newValue);
