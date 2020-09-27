@@ -185,6 +185,7 @@ export const ReactTransliterate = ({
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}
+        {...rest}
       />
       {options.length > 0 && (
         <ul
