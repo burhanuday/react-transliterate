@@ -23,6 +23,10 @@ export const ReactTransliterate = ({
   onChange,
   value,
   onKeyDown = () => {},
+  containerClassName = "",
+  containerStyles = {},
+  activeItemStyles = {},
+  ...rest
 }) => {
   const [options, setOptions] = useState([]);
   const [left, setLeft] = useState(0);
@@ -169,8 +173,10 @@ export const ReactTransliterate = ({
       // position relative is required to show the component
       // in the correct position
       style={{
+        ...containerStyles,
         position: "relative",
       }}
+      className={containerClassName}
     >
       <Component
         disabled={disabled}
@@ -180,27 +186,30 @@ export const ReactTransliterate = ({
         ref={inputRef}
         value={value}
       />
-      <ul
-        style={{
-          left: left + offsetX,
-          top: top + offsetY,
-          position: "absolute",
-        }}
-        className={classes.ReactTransliterate}
-      >
-        {options.map((item, index) => (
-          <li
-            className={index === selection ? classes.Active : null}
-            onMouseEnter={() => {
-              setSelection(index);
-            }}
-            onClick={() => handleSelection(index)}
-            key={item}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+      {options.length > 0 && (
+        <ul
+          style={{
+            left: left + offsetX,
+            top: top + offsetY,
+            position: "absolute",
+          }}
+          className={classes.ReactTransliterate}
+        >
+          {options.map((item, index) => (
+            <li
+              className={index === selection ? classes.Active : null}
+              style={index === selection ? activeItemStyles || {} : {}}
+              onMouseEnter={() => {
+                setSelection(index);
+              }}
+              onClick={() => handleSelection(index)}
+              key={item}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
