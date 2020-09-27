@@ -33,6 +33,7 @@ export const ReactTransliterate = ({
   const inputRef = useRef(null);
 
   const getSuggestions = async (lastWord) => {
+    // fetch suggestion from api
     const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
     try {
       const res = await fetch(url);
@@ -49,6 +50,8 @@ export const ReactTransliterate = ({
 
   const handleChange = (e) => {
     const value = e.target.value;
+
+    // bubble up event to the parent component
     onChange(e);
 
     // get the current index of the cursor
@@ -122,21 +125,33 @@ export const ReactTransliterate = ({
     }
   };
 
-  const handleResize = () => {};
+  const handleResize = () => {
+    // TODO implement the resize function to resize
+    // the helper on screen size change
+  };
+
   const handleSelection = (index) => {
     const currentString = value;
+    // create a new string with the currently typed word
+    // replaced with the word in transliterated language
     const newValue =
       currentString.substr(0, matchStart) +
       options[index] +
       " " +
       currentString.substr(matchEnd + 1, currentString.length);
+
+    // set the position of the caret (cursor) one character after the
+    // the position of the new word
     setCaretPosition(inputRef.current, matchStart);
+
+    // bubble up event to the parent component
     const e = { target: { value: newValue } };
     onChange(e);
     reset();
   };
 
   const reset = () => {
+    // reset the component
     setSelection(0);
     setOptions([]);
   };
@@ -151,6 +166,8 @@ export const ReactTransliterate = ({
 
   return (
     <div
+      // position relative is required to show the component
+      // in the correct position
       style={{
         position: "relative",
       }}
