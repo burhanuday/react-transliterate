@@ -15,8 +15,8 @@ const OPTION_LIST_MIN_WIDTH = 100;
 
 export const ReactTransliterate = ({
   Component = "input",
-  onBlur,
-  disabled,
+  onBlur = () => {},
+  disabled = false,
   lang = "hi",
   offsetX = 0,
   offsetY = 0,

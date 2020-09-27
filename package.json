@@ -5,6 +5,7 @@
   "author": "burhanuday",
   "license": "MIT",
   "repository": "burhanuday/react-transliterate",
+  "typings": "./dist/index.d.ts",
   "keywords": [
     "react",
     "transliterate",
@@ -26,7 +27,8 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "gentypes": "npx typescript src/index.js --declaration --allowJs --emitDeclarationOnly --outDir dist"
   },
   "peerDependencies": {
     "react": "^16.0.0"
