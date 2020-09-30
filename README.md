@@ -43,14 +43,55 @@ export default App;
 
 ### Props
 
-| Props     | Required? | Default | Description                                                                                         |
-| --------- | --------- | ------- | --------------------------------------------------------------------------------------------------- |
-| onChange  | Yes       |         | `onChange` function to pass to the component. Returns the event from the component                  |
-| value     | Yes       |         | `value` prop to pass to the component                                                               |
-| Component |           | input   | Component to render. You can pass components from your component library as this prop               |
-| lang      |           | hi      | Language you want to transliterate. Tested languages are `hi`, `mr`, `ur`. More languages to follow |
-| offsetY   |           | 0       | Extra space between the top of the helper and bottom of the caret                                   |
-| offsetX   |           | 0       | Extra space between the caret and left of the helper                                                |
+| Props      | Required? | Default | Description                                                                           |
+| ---------- | --------- | ------- | ------------------------------------------------------------------------------------- |
+| onChange   | Yes       |         | `onChange` function to pass to the component. Returns the event from the component    |
+| value      | Yes       |         | `value` prop to pass to the component                                                 |
+| Component  |           | input   | Component to render. You can pass components from your component library as this prop |
+| lang       |           | hi      | Language you want to transliterate. See the following section for language codes      |
+| maxOptions |           | 5       | Maximum number of suggestions to show in helper                                       |
+| offsetY    |           | 0       | Extra space between the top of the helper and bottom of the caret                     |
+| offsetX    |           | 0       | Extra space between the caret and left of the helper                                  |
+
+### Supported Languages
+
+| Language              | Code     |
+| --------------------- | -------- |
+| Amharic               | am       |
+| Arabic                | ar       |
+| Bangla                | bn       |
+| Belarusian            | be       |
+| Bulgarian             | bg       |
+| Chinese (Hong Kong)   | yue-hant |
+| Chinese (Simplified)  | zh       |
+| Chinese (Traditional) | zh-hant  |
+| French                | fr       |
+| German                | de       |
+| Greek                 | el       |
+| Gujarati              | gu       |
+| Hebrew                | he       |
+| Hindi                 | hi       |
+| Italian               | it       |
+| Japanese              | ja       |
+| Kannada               | kn       |
+| Malayalam             | ml       |
+| Marathi               | mr       |
+| Nepali                | ne       |
+| Odia                  | or       |
+| Persian               | fa       |
+| Portuguese (Brazil)   | pt       |
+| Punjabi               | pa       |
+| Russian               | ru       |
+| Sanskrit              | sa       |
+| Serbian               | sr       |
+| Sinhala               | si       |
+| Spanish               | es       |
+| Tamil                 | ta       |
+| Telugu                | te       |
+| Tigrinya              | ti       |
+| Ukrainian             | uk       |
+| Urdu                  | ur       |
+| Vietnamese            | vi       |
 
 ## License
 
