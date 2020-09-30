@@ -9,6 +9,7 @@
   padding: 1px;
   text-align: left;
   z-index: 20000;
+  width: 100%;
 }
 
 .ReactTransliterate > li {

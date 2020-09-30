@@ -26,6 +26,7 @@ export const ReactTransliterate = ({
   containerClassName = "",
   containerStyles = {},
   activeItemStyles = {},
+  maxOptions = 5,
   ...rest
 }) => {
   const [options, setOptions] = useState([]);
@@ -38,12 +39,14 @@ export const ReactTransliterate = ({
 
   const getSuggestions = async (lastWord) => {
     // fetch suggestion from api
-    const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
+    // const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
+    const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=13&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
     try {
       const res = await fetch(url);
       const data = await res.json();
       if (data && data[0] === "SUCCESS") {
-        const found = data[1][0][1];
+        let found = data[1][0][1];
+        found = found.slice(0, maxOptions);
         setOptions(found);
       }
     } catch (e) {
@@ -193,6 +196,7 @@ export const ReactTransliterate = ({
             left: left + offsetX,
             top: top + offsetY,
             position: "absolute",
+            width: "auto",
           }}
           className={classes.ReactTransliterate}
         >
