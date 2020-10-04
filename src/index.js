@@ -68,7 +68,10 @@ export const ReactTransliterate = ({
 
     // search for the last occurence of the space character from
     // the cursor
-    const indexOfLastSpace = value.lastIndexOf(" ", caret - 1);
+    const indexOfLastSpace =
+      value.lastIndexOf(" ", caret - 1) < value.lastIndexOf("\n", caret - 1)
+        ? value.lastIndexOf("\n", caret - 1)
+        : value.lastIndexOf(" ", caret - 1);
 
     // first character of the currently being typed word is
     // one character after the space character
@@ -142,10 +145,10 @@ export const ReactTransliterate = ({
     // create a new string with the currently typed word
     // replaced with the word in transliterated language
     const newValue =
-      currentString.substr(0, matchStart + 1) +
+      currentString.substring(0, matchStart) +
       options[index] +
       " " +
-      currentString.substr(matchEnd + 1, currentString.length);
+      currentString.substring(matchEnd + 1, currentString.length);
 
     // set the position of the caret (cursor) one character after the
     // the position of the new word
