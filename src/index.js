@@ -142,7 +142,7 @@ export const ReactTransliterate = ({
     // create a new string with the currently typed word
     // replaced with the word in transliterated language
     const newValue =
-      currentString.substr(0, matchStart) +
+      currentString.substr(0, matchStart + 1) +
       options[index] +
       " " +
       currentString.substr(matchEnd + 1, currentString.length);
