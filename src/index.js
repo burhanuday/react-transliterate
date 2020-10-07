@@ -19,7 +19,7 @@ export const ReactTransliterate = ({
   disabled = false,
   lang = "hi",
   offsetX = 0,
-  offsetY = 0,
+  offsetY = 10,
   onChange,
   value,
   onKeyDown = () => {},
@@ -152,7 +152,12 @@ export const ReactTransliterate = ({
 
     // set the position of the caret (cursor) one character after the
     // the position of the new word
-    setCaretPosition(inputRef.current, matchStart);
+    setTimeout(() => {
+      setCaretPosition(
+        inputRef.current,
+        matchStart + options[index].length + 1,
+      );
+    }, 1);
 
     // bubble up event to the parent component
     const e = { target: { value: newValue } };
@@ -196,8 +201,8 @@ export const ReactTransliterate = ({
       {options.length > 0 && (
         <ul
           style={{
-            left: left + offsetX,
-            top: top + offsetY,
+            left: `${left + offsetX}px`,
+            top: `${top + offsetY}px`,
             position: "absolute",
             width: "auto",
           }}
