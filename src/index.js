@@ -152,7 +152,12 @@ export const ReactTransliterate = ({
 
     // set the position of the caret (cursor) one character after the
     // the position of the new word
-    setCaretPosition(inputRef.current, matchStart);
+    setTimeout(() => {
+      setCaretPosition(
+        inputRef.current,
+        matchStart + options[index].length + 1,
+      );
+    }, 1);
 
     // bubble up event to the parent component
     const e = { target: { value: newValue } };
