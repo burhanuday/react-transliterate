@@ -19,7 +19,7 @@ export const ReactTransliterate = ({
   disabled = false,
   lang = "hi",
   offsetX = 0,
-  offsetY = 0,
+  offsetY = 10,
   onChange,
   value,
   onKeyDown = () => {},
@@ -196,8 +196,8 @@ export const ReactTransliterate = ({
       {options.length > 0 && (
         <ul
           style={{
-            left: left + offsetX,
-            top: top + offsetY,
+            left: `${left + offsetX}px`,
+            top: `${top + offsetY}px`,
             position: "absolute",
             width: "auto",
           }}
