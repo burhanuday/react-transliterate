@@ -22,9 +22,20 @@ code {
 }
 
 .language-dropdown {
-  margin: 20px 0;
+  width: 318px;
+  height: 48px;
+  margin-bottom: 30px;
+  border: 0;
+  box-shadow: 0 0 12px 0 #eee;
+  padding-left: 15px;
+  margin-left: 15px;
+  padding-right: 32px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 30px;
+  background: url('data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') 98% 50% no-repeat #fff;
 }
-
 input {
   width: 100%;
   height: 40px;
