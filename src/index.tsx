@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import * as React from "react";
+import { useEffect, useRef, useState } from "react";
 import getInputSelection, { setCaretPosition } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
@@ -13,14 +14,22 @@ const KEY_TAB = 9;
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
 
+interface Props extends React.HTMLProps<HTMLInputElement> {
+  Component: React.ReactElement;
+  offsetX: number;
+  offsetY: number;
+  containerClassName: string;
+  containerStyles: React.CSSProperties;
+  activeItemStyles: React.CSSProperties;
+  maxOptions: number;
+}
+
 export const ReactTransliterate = ({
-  Component = "input",
-  onBlur = () => {},
-  disabled = false,
+  Component = <input />,
   lang = "hi",
   offsetX = 0,
   offsetY = 10,
-  onChange,
+  onChange = () => {},
   value,
   onKeyDown = () => {},
   containerClassName = "",
@@ -28,16 +37,16 @@ export const ReactTransliterate = ({
   activeItemStyles = {},
   maxOptions = 5,
   ...rest
-}) => {
-  const [options, setOptions] = useState([]);
+}: Props) => {
+  const [options, setOptions] = useState<string[]>([]);
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
-  const [selection, setSelection] = useState(0);
+  const [selection, setSelection] = useState<number>(0);
   const [matchStart, setMatchStart] = useState(-1);
   const [matchEnd, setMatchEnd] = useState(-1);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const getSuggestions = async (lastWord) => {
+  const getSuggestions = async (lastWord: string) => {
     // fetch suggestion from api
     // const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
     const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=13&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
@@ -55,8 +64,8 @@ export const ReactTransliterate = ({
     }
   };
 
-  const handleChange = (e) => {
-    const value = e.target.value;
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
 
     // bubble up event to the parent component
     onChange(e);
@@ -64,6 +73,9 @@ export const ReactTransliterate = ({
     // get the current index of the cursor
     const caret = getInputSelection(e.target).end;
     const input = inputRef.current;
+
+    if (!input) return;
+
     const caretPos = getCaretCoordinates(input, caret);
 
     // search for the last occurence of the space character from
@@ -118,7 +130,7 @@ export const ReactTransliterate = ({
     }
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const helperVisible = options.length > 0;
 
     if (helperVisible) {
@@ -155,10 +167,11 @@ export const ReactTransliterate = ({
     // the helper on screen size change
   };
 
-  const handleSelection = (index) => {
+  const handleSelection = (index: number) => {
     const currentString = value;
     // create a new string with the currently typed word
     // replaced with the word in transliterated language
+    if (typeof currentString !== "string") return;
     const newValue =
       currentString.substring(0, matchStart) +
       options[index] +
@@ -175,7 +188,9 @@ export const ReactTransliterate = ({
     }, 1);
 
     // bubble up event to the parent component
-    const e = { target: { value: newValue } };
+    const e = ({ target: { value: newValue } } as unknown) as React.FormEvent<
+      HTMLInputElement
+    >;
     onChange(e);
     reset();
   };
@@ -204,15 +219,20 @@ export const ReactTransliterate = ({
       }}
       className={containerClassName}
     >
-      <Component
-        disabled={disabled}
-        onBlur={onBlur}
+      {React.cloneElement(Component, {
+        onChange: handleChange,
+        onKeyDown: handleKeyDown,
+        ref: inputRef,
+        value: value,
+        ...rest,
+      })}
+      {/* <Component
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}
         {...rest}
-      />
+      /> */}
       {options.length > 0 && (
         <ul
           style={{
@@ -225,7 +245,7 @@ export const ReactTransliterate = ({
         >
           {options.map((item, index) => (
             <li
-              className={index === selection ? classes.Active : null}
+              className={index === selection ? classes.Active : undefined}
               style={index === selection ? activeItemStyles || {} : {}}
               onMouseEnter={() => {
                 setSelection(index);
