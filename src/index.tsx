@@ -71,7 +71,7 @@ export const ReactTransliterate = ({
     onChange(e);
 
     // get the current index of the cursor
-    const caret = getInputSelection(e.target).end;
+    const caret = getInputSelection(e.target as HTMLInputElement).end;
     const input = inputRef.current;
 
     if (!input) return;
@@ -182,7 +182,7 @@ export const ReactTransliterate = ({
     // the position of the new word
     setTimeout(() => {
       setCaretPosition(
-        inputRef.current,
+        inputRef.current!,
         matchStart + options[index].length + 1,
       );
     }, 1);
