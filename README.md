@@ -41,20 +41,22 @@ const App = () => {
 export default App;
 ```
 
+For a full example, take a look at the `example` folder
+
 ### Props
 
 | Props              | Required? | Default      | Description                                                                           |
 | ------------------ | --------- | ------------ | ------------------------------------------------------------------------------------- |
 | onChange           | Yes       |              | `onChange` function to pass to the component. Returns the event from the component    |
 | value              | Yes       |              | `value` prop to pass to the component                                                 |
-| Component          |           | \<input/>     | Component to render. You can pass components from your component library as this prop |
+| Component          |           | `<input/>`   | Component to render. You can pass components from your component library as this prop |
 | lang               |           | hi           | Language you want to transliterate. See the following section for language codes      |
 | maxOptions         |           | 5            | Maximum number of suggestions to show in helper                                       |
 | offsetY            |           | 0            | Extra space between the top of the helper and bottom of the caret                     |
 | offsetX            |           | 0            | Extra space between the caret and left of the helper                                  |
 | containerClassName |           | empty string | Classname passed to the container of the component                                    |
 | containerStyles    |           | {}           | CSS styles object passed to the container                                             |
-| activeItemStyles   |           | {}           | CSS styles object passed to the active item <li> tag                                  |
+| activeItemStyles   |           | {}           | CSS styles object passed to the active item `<li>` tag                                |
 
 ### Supported Languages
 
