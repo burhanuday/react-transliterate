@@ -22,6 +22,42 @@ interface Props extends React.HTMLProps<HTMLInputElement> {
   containerStyles: React.CSSProperties;
   activeItemStyles: React.CSSProperties;
   maxOptions: number;
+  lang:
+    | "am"
+    | "ar"
+    | "bn"
+    | "be"
+    | "bg"
+    | "yue-hant"
+    | "zh"
+    | "zh-hant"
+    | "fr"
+    | "de"
+    | "el"
+    | "gu"
+    | "he"
+    | "hi"
+    | "it"
+    | "ja"
+    | "kn"
+    | "ml"
+    | "mr"
+    | "ne"
+    | "or"
+    | "fa"
+    | "pt"
+    | "pa"
+    | "ru"
+    | "sa"
+    | "sr"
+    | "si"
+    | "es"
+    | "ta"
+    | "te"
+    | "ti"
+    | "uk"
+    | "ur"
+    | "vi";
 }
 
 export const ReactTransliterate = ({
