@@ -14,7 +14,8 @@ const KEY_TAB = 9;
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
 
-interface Props extends React.HTMLProps<HTMLInputElement> {
+interface Props
+  extends React.HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
   Component: React.ReactElement;
   offsetX: number;
   offsetY: number;
