@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import getInputSelection, { setCaretPosition } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
@@ -27,6 +27,8 @@ interface Props
   lang?: Languages;
   onChangeText: (text: string) => void;
   value: string;
+  hideSuggestionBoxOnMobileDevices?: boolean;
+  hideSuggestionBoxBreakpoint?: number;
 }
 
 export const ReactTransliterate = ({
@@ -45,6 +47,8 @@ export const ReactTransliterate = ({
   containerStyles = {},
   activeItemStyles = {},
   maxOptions = 5,
+  hideSuggestionBoxOnMobileDevices = true,
+  hideSuggestionBoxBreakpoint = 450,
   ...rest
 }: Props): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -54,6 +58,15 @@ export const ReactTransliterate = ({
   const [matchStart, setMatchStart] = useState(-1);
   const [matchEnd, setMatchEnd] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  const shouldRenderSuggestions = useMemo(
+    () =>
+      hideSuggestionBoxOnMobileDevices
+        ? windowSize.width > hideSuggestionBoxBreakpoint
+        : true,
+    [windowSize],
+  );
 
   const reset = () => {
     // reset the component
@@ -92,6 +105,9 @@ export const ReactTransliterate = ({
   };
 
   const getSuggestions = async (lastWord: string) => {
+    if (!shouldRenderSuggestions) {
+      return;
+    }
     // fetch suggestion from api
     // const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
     const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=13&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
@@ -115,6 +131,10 @@ export const ReactTransliterate = ({
     // bubble up event to the parent component
     onChange(e);
     onChangeText(value);
+
+    if (!shouldRenderSuggestions) {
+      return;
+    }
 
     // get the current index of the cursor
     const caret = getInputSelection(e.target as HTMLInputElement).end;
@@ -211,10 +231,16 @@ export const ReactTransliterate = ({
   const handleResize = () => {
     // TODO implement the resize function to resize
     // the helper on screen size change
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    setWindowSize({ width, height });
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    setWindowSize({ width, height });
 
     return () => {
       window.removeEventListener("resize", handleResize);
