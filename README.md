@@ -45,18 +45,20 @@ For a full example, take a look at the `example` folder
 
 ### Props
 
-| Props              | Required? | Default      | Description                                                                           |
-| ------------------ | --------- | ------------ | ------------------------------------------------------------------------------------- |
-| onChangeText       | Yes       |              | Gets the current value from the component. `(text: string) => void`                   |
-| value              | Yes       |              | `value` prop to pass to the component                                                 |
-| Component          |           | `<input/>`   | Component to render. You can pass components from your component library as this prop |
-| lang               |           | hi           | Language you want to transliterate. See the following section for language codes      |
-| maxOptions         |           | 5            | Maximum number of suggestions to show in helper                                       |
-| offsetY            |           | 0            | Extra space between the top of the helper and bottom of the caret                     |
-| offsetX            |           | 0            | Extra space between the caret and left of the helper                                  |
-| containerClassName |           | empty string | Classname passed to the container of the component                                    |
-| containerStyles    |           | {}           | CSS styles object passed to the container                                             |
-| activeItemStyles   |           | {}           | CSS styles object passed to the active item `<li>` tag                                |
+| Props                            | Required? | Default      | Description                                                                                                                         |
+| -------------------------------- | --------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| onChangeText                     | Yes       |              | Gets the current value from the component. `(text: string) => void`                                                                 |
+| value                            | Yes       |              | `value` prop to pass to the component                                                                                               |
+| Component                        |           | `<input/>`   | Component to render. You can pass components from your component library as this prop                                               |
+| lang                             |           | hi           | Language you want to transliterate. See the following section for language codes                                                    |
+| maxOptions                       |           | 5            | Maximum number of suggestions to show in helper                                                                                     |
+| offsetY                          |           | 0            | Extra space between the top of the helper and bottom of the caret                                                                   |
+| offsetX                          |           | 0            | Extra space between the caret and left of the helper                                                                                |
+| containerClassName               |           | empty string | Classname passed to the container of the component                                                                                  |
+| containerStyles                  |           | {}           | CSS styles object passed to the container                                                                                           |
+| activeItemStyles                 |           | {}           | CSS styles object passed to the active item `<li>` tag                                                                              |
+| hideSuggestionBoxOnMobileDevices |           | true         | Should the suggestions be visible on mobile devices since keyboards like Gboard and Swiftkey support typing in multiple languages   |
+| hideSuggestionBoxBreakpoint      |           | 450          | type: `number`. To be used when `hideSuggestionBoxOnMobileDevices` is true. Suggestion box will not be shown below this device width |
 
 ### Supported Languages
 
