@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { languages } from "./languages";
 
 // import component
-import { ReactTransliterate } from "react-transliterate";
+import { ReactTransliterate, Languages } from "react-transliterate";
 import "react-transliterate/dist/index.css";
 
 const App = () => {
   const [text, setText] = useState("");
 
-  const [lang, setLang] = useState("hi");
+  const [lang, setLang] = useState<Languages>("hi");
 
   return (
     <div className="container">
@@ -19,7 +19,7 @@ const App = () => {
       <select
         className="language-dropdown"
         value={lang}
-        onChange={(e) => setLang(e.target.value)}
+        onChange={(e) => setLang(e.target.value as Languages)}
       >
         {languages.map((l) => (
           <option key={l.value} value={l.value}>
@@ -30,12 +30,28 @@ const App = () => {
 
       <ReactTransliterate
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChangeText={(text) => {
+          console.log("[example]", "text value", text);
+
+          setText(text);
+        }}
         lang={lang}
         placeholder="Start typing here..."
         containerStyles={{
           width: "300px",
         }}
+      />
+
+      <ReactTransliterate
+        Component={<textarea />}
+        value={text}
+        onChangeText={(text) => {
+          console.log("[example]", "text value", text);
+
+          setText(text);
+        }}
+        lang={lang}
+        placeholder="Start typing here..."
       />
     </div>
   );

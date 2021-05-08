@@ -17,14 +17,16 @@ const OPTION_LIST_MIN_WIDTH = 100;
 
 interface Props
   extends React.HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
-  Component: React.ReactElement;
-  offsetX: number;
-  offsetY: number;
-  containerClassName: string;
-  containerStyles: React.CSSProperties;
-  activeItemStyles: React.CSSProperties;
-  maxOptions: number;
-  lang: Languages;
+  Component?: React.ReactElement;
+  offsetX?: number;
+  offsetY?: number;
+  containerClassName?: string;
+  containerStyles?: React.CSSProperties;
+  activeItemStyles?: React.CSSProperties;
+  maxOptions?: number;
+  lang?: Languages;
+  onChangeText: (text: string) => void;
+  value: string;
 }
 
 export const ReactTransliterate = ({
@@ -34,6 +36,8 @@ export const ReactTransliterate = ({
   offsetY = 10,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange = () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChangeText = () => {},
   value,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onKeyDown = () => {},
@@ -82,6 +86,7 @@ export const ReactTransliterate = ({
     const e = ({ target: { value: newValue } } as unknown) as React.FormEvent<
       HTMLInputElement
     >;
+    onChangeText(newValue);
     onChange(e);
     reset();
   };
@@ -109,6 +114,7 @@ export const ReactTransliterate = ({
 
     // bubble up event to the parent component
     onChange(e);
+    onChangeText(value);
 
     // get the current index of the cursor
     const caret = getInputSelection(e.target as HTMLInputElement).end;
@@ -260,3 +266,5 @@ export const ReactTransliterate = ({
     </div>
   );
 };
+
+export type { Languages };
