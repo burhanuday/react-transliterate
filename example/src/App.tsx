@@ -31,8 +31,6 @@ const App = () => {
       <ReactTransliterate
         value={text}
         onChangeText={(text) => {
-          console.log("[example]", "text value", text);
-
           setText(text);
         }}
         lang={lang}
@@ -46,8 +44,6 @@ const App = () => {
         Component={<textarea />}
         value={text}
         onChangeText={(text) => {
-          console.log("[example]", "text value", text);
-
           setText(text);
         }}
         lang={lang}
