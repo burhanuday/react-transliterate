@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { languages } from "./languages";
 
 // import component
-import { ReactTransliterate, Languages } from "react-transliterate";
+import { ReactTransliterate, Language } from "react-transliterate";
 import "react-transliterate/dist/index.css";
 
 const App = () => {
   const [text, setText] = useState("");
 
-  const [lang, setLang] = useState<Languages>("hi");
+  const [lang, setLang] = useState<Language>("hi");
 
   return (
     <div className="container">
@@ -19,7 +19,7 @@ const App = () => {
       <select
         className="language-dropdown"
         value={lang}
-        onChange={(e) => setLang(e.target.value as Languages)}
+        onChange={(e) => setLang(e.target.value as Language)}
       >
         {languages.map((l) => (
           <option key={l.value} value={l.value}>

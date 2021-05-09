@@ -47,7 +47,7 @@ For a full example, take a look at the `example` folder
 
 | Props                            | Required? | Default      | Description                                                                                                                         |
 | -------------------------------- | --------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| onChangeText                     | Yes       |              | Gets the current value from the component. `(text: string) => void`                                                                 |
+| onChangeText                     | Yes       |              | Listener for the current value from the component. `(text: string) => void`                                                                 |
 | value                            | Yes       |              | `value` prop to pass to the component                                                                                               |
 | Component                        |           | `<input/>`   | Component to render. You can pass components from your component library as this prop                                               |
 | lang                             |           | hi           | Language you want to transliterate. See the following section for language codes                                                    |

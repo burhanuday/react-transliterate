@@ -3,7 +3,8 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import getInputSelection, { setCaretPosition } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
-import { Languages } from "./languages";
+import { ReactTransliterateProps } from "./interfaces/Props";
+import { Language } from "./types/Language";
 
 const KEY_UP = 38;
 const KEY_DOWN = 40;
@@ -14,22 +15,6 @@ const KEY_TAB = 9;
 
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
-
-interface Props
-  extends React.HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
-  Component?: React.ReactElement;
-  offsetX?: number;
-  offsetY?: number;
-  containerClassName?: string;
-  containerStyles?: React.CSSProperties;
-  activeItemStyles?: React.CSSProperties;
-  maxOptions?: number;
-  lang?: Languages;
-  onChangeText: (text: string) => void;
-  value: string;
-  hideSuggestionBoxOnMobileDevices?: boolean;
-  hideSuggestionBoxBreakpoint?: number;
-}
 
 export const ReactTransliterate = ({
   Component = <input />,
@@ -50,7 +35,7 @@ export const ReactTransliterate = ({
   hideSuggestionBoxOnMobileDevices = true,
   hideSuggestionBoxBreakpoint = 450,
   ...rest
-}: Props): JSX.Element => {
+}: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
@@ -293,4 +278,5 @@ export const ReactTransliterate = ({
   );
 };
 
-export type { Languages };
+export type { Language };
+export { ReactTransliterateProps };

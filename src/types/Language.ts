@@ -1,4 +1,4 @@
-export type Languages =
+export type Language =
   | "am"
   | "ar"
   | "bn"
