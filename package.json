@@ -27,7 +27,8 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "dev": "yarn start & cd example && yarn start"
   },
   "peerDependencies": {
     "react": "^16.0.0"
