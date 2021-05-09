@@ -249,7 +249,7 @@ export const ReactTransliterate = ({
         value: value,
         ...rest,
       })}
-      {options.length > 0 && (
+      {shouldRenderSuggestions && options.length > 0 && (
         <ul
           style={{
             left: `${left + offsetX}px`,
