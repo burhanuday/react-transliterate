@@ -121,8 +121,6 @@ const App = () => {
         setText(text);
       }}
       lang={lang}
-      placeholder="Start typing here..."
-      id="react-transliterate-material-ui-input"
     />
   );
 };
