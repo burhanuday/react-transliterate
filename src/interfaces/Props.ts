@@ -5,9 +5,9 @@ export interface ReactTransliterateProps
   /**
    * Component to render. You can pass components from your
    * component library as this prop. Default is `<input />`
-   * @type React.ReactElement
+   * @type React.ReactNode
    */
-  Component?: React.ReactElement;
+  renderComponent?: (props: any) => React.ReactNode;
 
   /**
    * Extra space between the caret and left of the helper

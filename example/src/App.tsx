@@ -7,6 +7,9 @@ import { languages } from "./languages";
 import { ReactTransliterate, Language } from "react-transliterate";
 import "react-transliterate/dist/index.css";
 
+// Material Ui input component
+import Input from "@material-ui/core/Input";
+
 const App = () => {
   const [text, setText] = useState("");
 
@@ -28,6 +31,9 @@ const App = () => {
         ))}
       </select>
 
+      <div className="spacer" />
+
+      <label htmlFor="react-transliterate-input">Using input</label>
       <ReactTransliterate
         value={text}
         onChangeText={(text) => {
@@ -35,19 +41,43 @@ const App = () => {
         }}
         lang={lang}
         placeholder="Start typing here..."
-        containerStyles={{
-          width: "300px",
-        }}
+        id="react-transliterate-input"
       />
 
+      <div className="spacer" />
+
+      <label htmlFor="react-transliterate-textarea">Using textarea</label>
       <ReactTransliterate
-        Component={<textarea />}
+        renderComponent={(props) => <textarea {...props} />}
         value={text}
         onChangeText={(text) => {
           setText(text);
         }}
         lang={lang}
         placeholder="Start typing here..."
+        id="react-transliterate-textarea"
+      />
+
+      <div className="spacer" />
+
+      <label htmlFor="react-transliterate-material-ui-input">
+        Using Material UI input
+      </label>
+      <ReactTransliterate
+        renderComponent={(props) => {
+          const inputRef = props.ref;
+
+          delete props["ref"];
+
+          return <Input fullWidth {...props} inputRef={inputRef} />;
+        }}
+        value={text}
+        onChangeText={(text) => {
+          setText(text);
+        }}
+        lang={lang}
+        placeholder="Start typing here..."
+        id="react-transliterate-material-ui-input"
       />
     </div>
   );

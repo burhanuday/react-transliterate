@@ -17,7 +17,7 @@ const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
 
 export const ReactTransliterate = ({
-  Component = <input />,
+  renderComponent = (props) => <input {...props} />,
   lang = "hi",
   offsetX = 0,
   offsetY = 10,
@@ -50,7 +50,7 @@ export const ReactTransliterate = ({
       hideSuggestionBoxOnMobileDevices
         ? windowSize.width > hideSuggestionBoxBreakpoint
         : true,
-    [windowSize],
+    [windowSize, hideSuggestionBoxBreakpoint, hideSuggestionBoxOnMobileDevices],
   );
 
   const reset = () => {
@@ -242,7 +242,7 @@ export const ReactTransliterate = ({
       }}
       className={containerClassName}
     >
-      {React.cloneElement(Component, {
+      {renderComponent({
         onChange: handleChange,
         onKeyDown: handleKeyDown,
         ref: inputRef,
