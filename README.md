@@ -1,6 +1,6 @@
 <center><h1>React Transliterate</h1></center>
 
-Transliterate component for React. Uses API from [Google Input Tools](https://www.google.com/inputtools)
+Transliteration component for React with support for over 30 languages. Uses API from [Google Input Tools](https://www.google.com/inputtools)
 
 [![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate)
 
@@ -16,6 +16,9 @@ Transliterate component for React. Uses API from [Google Input Tools](https://ww
 
 ```bash
 npm install --save react-transliterate
+
+OR
+
 yarn add react-transliterate
 ```
 
