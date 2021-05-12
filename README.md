@@ -1,10 +1,16 @@
-# React Transliterate
+<center><h1>React Transliterate</h1></center>
 
 Transliterate component for React. Uses API from [Google Input Tools](https://www.google.com/inputtools)
 
-[![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate)
 
-![Demo gif](./assets/demo.gif)
+<figure class="video_container">
+  <video controls="true" allowfullscreen="true">
+    <source src="./assets/hi.mp4" type="video/mp4">
+  </video>
+</figure>
+
+## Demo
 
 [See Demo](https://burhanuday.tech/react-transliterate/)
 
