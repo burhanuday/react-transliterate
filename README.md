@@ -4,11 +4,9 @@ Transliterate component for React. Uses API from [Google Input Tools](https://ww
 
 [![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate)
 
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true">
-    <source src="./assets/hi.mp4" type="video/mp4">
-  </video>
-</figure>
+<center>
+<img src="./assets/hi.gif"></img>
+</center>
 
 ## Demo
 
