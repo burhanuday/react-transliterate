@@ -135,7 +135,7 @@ const App = () => {
 export default App;
 ```
 
-## Custom trigger keys
+### Custom trigger keys
 
 Keys which when pressed, input the current selection to the textbox
 
