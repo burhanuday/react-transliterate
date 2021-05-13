@@ -1,12 +1,12 @@
-<center><h1>React Transliterate</h1></center>
+<h1 align="center">React Transliterate</h1>
 
 Transliteration component for React with support for over 30 languages. Uses API from [Google Input Tools](https://www.google.com/inputtools)
 
 [![NPM](https://img.shields.io/npm/v/react-transliterate.svg)](https://www.npmjs.com/package/react-transliterate)
 
-<center>
+<p align="center">
 <img src="./assets/hi.gif"></img>
-</center>
+</p>
 
 ## Demo
 
