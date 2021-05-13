@@ -5,13 +5,11 @@ import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
 import { ReactTransliterateProps } from "./interfaces/Props";
 import { Language } from "./types/Language";
+import { TriggerKeys } from "./constants/TriggerKeys";
 
 const KEY_UP = 38;
 const KEY_DOWN = 40;
-const KEY_RETURN = 13;
-const KEY_ENTER = 14;
 const KEY_ESCAPE = 27;
-const KEY_TAB = 9;
 
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
@@ -34,6 +32,12 @@ export const ReactTransliterate = ({
   maxOptions = 5,
   hideSuggestionBoxOnMobileDevices = true,
   hideSuggestionBoxBreakpoint = 450,
+  triggerKeys = [
+    TriggerKeys.KEY_SPACE,
+    TriggerKeys.KEY_ENTER,
+    TriggerKeys.KEY_RETURN,
+    TriggerKeys.KEY_TAB,
+  ],
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -185,28 +189,27 @@ export const ReactTransliterate = ({
     const helperVisible = options.length > 0;
 
     if (helperVisible) {
-      switch (event.keyCode) {
-        case KEY_ESCAPE:
-          event.preventDefault();
-          reset();
-          break;
-        case KEY_UP:
-          event.preventDefault();
-          setSelection((options.length + selection - 1) % options.length);
-          break;
-        case KEY_DOWN:
-          event.preventDefault();
-          setSelection((selection + 1) % options.length);
-          break;
-        case KEY_ENTER:
-        case KEY_RETURN:
-        case KEY_TAB:
-          event.preventDefault();
-          handleSelection(selection);
-          break;
-        default:
-          onKeyDown(event);
-          break;
+      if (triggerKeys.includes(event.keyCode)) {
+        event.preventDefault();
+        handleSelection(selection);
+      } else {
+        switch (event.keyCode) {
+          case KEY_ESCAPE:
+            event.preventDefault();
+            reset();
+            break;
+          case KEY_UP:
+            event.preventDefault();
+            setSelection((options.length + selection - 1) % options.length);
+            break;
+          case KEY_DOWN:
+            event.preventDefault();
+            setSelection((selection + 1) % options.length);
+            break;
+          default:
+            onKeyDown(event);
+            break;
+        }
       }
     } else {
       onKeyDown(event);
@@ -279,4 +282,4 @@ export const ReactTransliterate = ({
 };
 
 export type { Language };
-export { ReactTransliterateProps };
+export { ReactTransliterateProps, TriggerKeys };

@@ -69,4 +69,9 @@ export interface ReactTransliterateProps
    * @type number
    */
   hideSuggestionBoxBreakpoint?: number;
+
+  /**
+   * Keys which when pressed, input the current selection to the textbox
+   */
+  triggerKeys?: number[];
 }
