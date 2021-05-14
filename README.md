@@ -188,7 +188,7 @@ For a full example, take a look at the `example` folder
 | containerClassName               |           | empty string                              | Classname passed to the container of the component                                                                                   |
 | containerStyles                  |           | {}                                        | CSS styles object passed to the container                                                                                            |
 | activeItemStyles                 |           | {}                                        | CSS styles object passed to the active item `<li>` tag                                                                               |
-| hideSuggestionBoxOnMobileDevices |           | true                                      | Should the suggestions be visible on mobile devices since keyboards like Gboard and Swiftkey support typing in multiple languages    |
+| hideSuggestionBoxOnMobileDevices |           | false                                     | Should the suggestions be visible on mobile devices since keyboards like Gboard and Swiftkey support typing in multiple languages    |
 | hideSuggestionBoxBreakpoint      |           | 450                                       | type: `number`. To be used when `hideSuggestionBoxOnMobileDevices` is true. Suggestion box will not be shown below this device width |
 | triggerKeys                      |           | KEY_SPACE, KEY_ENTER, KEY_TAB, KEY_RETURN | Keys which when pressed, input the current selection to the textbox                                                                  |
 

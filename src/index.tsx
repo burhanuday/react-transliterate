@@ -30,7 +30,7 @@ export const ReactTransliterate = ({
   containerStyles = {},
   activeItemStyles = {},
   maxOptions = 5,
-  hideSuggestionBoxOnMobileDevices = true,
+  hideSuggestionBoxOnMobileDevices = false,
   hideSuggestionBoxBreakpoint = 450,
   triggerKeys = [
     TriggerKeys.KEY_SPACE,
