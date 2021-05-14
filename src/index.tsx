@@ -23,6 +23,8 @@ export const ReactTransliterate = ({
   onChange = () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangeText = () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onBlur = () => {},
   value,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onKeyDown = () => {},
@@ -223,12 +225,15 @@ export const ReactTransliterate = ({
     }
   };
 
-  const handleBlur = () => {
+  const handleBlur = (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     if (insertCurrentSelectionOnBlur && options[0]) {
       handleSelection(0);
     } else {
       reset();
     }
+    onBlur(event);
   };
 
   const handleResize = () => {
