@@ -38,6 +38,7 @@ export const ReactTransliterate = ({
     TriggerKeys.KEY_RETURN,
     TriggerKeys.KEY_TAB,
   ],
+  insertCurrentSelectionOnBlur = true,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -216,6 +217,15 @@ export const ReactTransliterate = ({
     }
   };
 
+  const handleBlur = () => {
+    console.log("blurred");
+    if (insertCurrentSelectionOnBlur && options[0]) {
+      handleSelection(0);
+    } else {
+      reset();
+    }
+  };
+
   const handleResize = () => {
     // TODO implement the resize function to resize
     // the helper on screen size change
@@ -248,6 +258,7 @@ export const ReactTransliterate = ({
       {renderComponent({
         onChange: handleChange,
         onKeyDown: handleKeyDown,
+        onBlur: handleBlur,
         ref: inputRef,
         value: value,
         ...rest,
