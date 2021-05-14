@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // language list for example only
 import { languages } from "./languages";
@@ -19,9 +19,6 @@ const App = () => {
     setUseDebounce(e.target.checked);
   };
 
-  useEffect(() => {
-    console.log(useDebounce);
-  }, [useDebounce]);
   return (
     <div className="container">
       <h2>React transliterate</h2>
