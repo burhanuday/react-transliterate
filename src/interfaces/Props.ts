@@ -80,4 +80,10 @@ export interface ReactTransliterateProps
    * @type boolean
    */
   insertCurrentSelectionOnBlur?: boolean;
+
+  /**
+   * Show current input as the last option in the suggestion box
+   * @type boolean
+   */
+  showCurrentWordAsLastSuggestion?: boolean;
 }

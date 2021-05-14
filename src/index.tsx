@@ -39,6 +39,7 @@ export const ReactTransliterate = ({
     TriggerKeys.KEY_TAB,
   ],
   insertCurrentSelectionOnBlur = true,
+  showCurrentWordAsLastSuggestion = true,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -100,13 +101,18 @@ export const ReactTransliterate = ({
     }
     // fetch suggestion from api
     // const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
-    const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=13&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
+
+    const numOptions = showCurrentWordAsLastSuggestion
+      ? maxOptions - 1
+      : maxOptions;
+    const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=${numOptions}&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
     try {
       const res = await fetch(url);
       const data = await res.json();
       if (data && data[0] === "SUCCESS") {
-        let found = data[1][0][1];
-        found = found.slice(0, maxOptions);
+        const found = showCurrentWordAsLastSuggestion
+          ? [...data[1][0][1], lastWord]
+          : data[1][0][1];
         setOptions(found);
       }
     } catch (e) {
@@ -218,7 +224,6 @@ export const ReactTransliterate = ({
   };
 
   const handleBlur = () => {
-    console.log("blurred");
     if (insertCurrentSelectionOnBlur && options[0]) {
       handleSelection(0);
     } else {

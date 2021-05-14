@@ -192,6 +192,7 @@ For a full example, take a look at the `example` folder
 | hideSuggestionBoxBreakpoint      |           | 450                                         | type: `number`. To be used when `hideSuggestionBoxOnMobileDevices` is true. Suggestion box will not be shown below this device width |
 | triggerKeys                      |           | `KEY_SPACE, KEY_ENTER, KEY_TAB, KEY_RETURN` | Keys which when pressed, input the current selection to the textbox                                                                  |
 | insertCurrentSelectionOnBlur     |           | `true`                                      | Should the current selection be inserted when `blur` event occurs                                                                    |
+| showCurrentWordAsLastSuggestion  |           | `true`                                      | Show current input as the last option in the suggestion box                                                                          |
 
 ### Supported Languages
 
