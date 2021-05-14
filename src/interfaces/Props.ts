@@ -1,4 +1,5 @@
 import { Language } from "../types/Language";
+import iDebounceOptions from "./DebounceOptions";
 
 export interface ReactTransliterateProps
   extends React.HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
@@ -86,4 +87,25 @@ export interface ReactTransliterateProps
    * @type boolean
    */
   showCurrentWordAsLastSuggestion?: boolean;
+
+  /**
+   * if true it will use debouncing while showing suggessions
+   * @type boolean
+   */
+  useDebounce?: boolean;
+
+  /**
+    *  It is the number of milliseconds for which the calls are to be delayed.
+    *  It is an optional parameter. The default value is 300ms.
+    * @type number
+    */
+  debounceWait?: number;
+  
+  /**
+    *  leading=false (boolean): Specify invoking on the leading edge of the timeout.
+    *  maxWait (number): The maximum time func is allowed to be delayed before it's invoked.
+    *  trailing=true (boolean): Specify invoking on the trailing edge of the timeout.
+    * @type object
+    */
+  debounceOptions?: iDebounceOptions;
 }

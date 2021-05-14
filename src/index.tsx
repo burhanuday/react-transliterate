@@ -1,15 +1,17 @@
 import * as React from "react";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import getInputSelection, { setCaretPosition } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
 import { ReactTransliterateProps } from "./interfaces/Props";
 import { Language } from "./types/Language";
 import { TriggerKeys } from "./constants/TriggerKeys";
+import debounce from "lodash.debounce";
 
 const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_ESCAPE = 27;
+const DEFAULT_DEBOUNCE_WAIT = 300;
 
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
@@ -42,6 +44,9 @@ export const ReactTransliterate = ({
   ],
   insertCurrentSelectionOnBlur = true,
   showCurrentWordAsLastSuggestion = true,
+  useDebounce,
+  debounceOptions,
+  debounceWait,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -122,6 +127,20 @@ export const ReactTransliterate = ({
       console.error("There was an error with transliteration", e);
     }
   };
+  const [delayedInputQuery, setDelayedInputQuery] = useState("");
+  const getDelayedSuggessions = useCallback(
+    debounce(
+      () => getSuggestions(delayedInputQuery),
+      debounceWait || DEFAULT_DEBOUNCE_WAIT,
+      debounceOptions,
+    ),
+    [delayedInputQuery],
+  );
+
+  useEffect(() => {
+    if (delayedInputQuery.length > 0) getDelayedSuggessions();
+    return getDelayedSuggessions.cancel;
+  }, [delayedInputQuery, getDelayedSuggessions]);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
@@ -160,8 +179,9 @@ export const ReactTransliterate = ({
     const currentWord = value.slice(indexOfLastSpace + 1, caret);
     if (currentWord) {
       // make an api call to fetch suggestions
-      getSuggestions(currentWord);
-
+      // getSuggestions(currentWord);
+      if (useDebounce) setDelayedInputQuery(currentWord);
+      else getSuggestions(currentWord);
       const rect = input.getBoundingClientRect();
       // console.log("caretPos", caretPos.top);
       // console.log("rect", rect.height);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // language list for example only
 import { languages } from "./languages";
@@ -14,7 +14,14 @@ const App = () => {
   const [text, setText] = useState("");
 
   const [lang, setLang] = useState<Language>("hi");
+  const [useDebounce, setUseDebounce] = useState<boolean>(false);
+  const toggleUseDebounce = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUseDebounce(e.target.checked);
+  };
 
+  useEffect(() => {
+    console.log(useDebounce);
+  }, [useDebounce]);
   return (
     <div className="container">
       <h2>React transliterate</h2>
@@ -32,6 +39,16 @@ const App = () => {
       </select>
 
       <div className="spacer" />
+      <form>
+        <input
+          type="checkbox"
+          checked={useDebounce}
+          name="useDebounce"
+          onChange={toggleUseDebounce}
+        />
+        <label htmlFor="useDebounce">Use Debouncing</label>
+      </form>
+      <div className="spacer" />
 
       <label htmlFor="react-transliterate-input">Using input</label>
       <ReactTransliterate
@@ -42,13 +59,15 @@ const App = () => {
         lang={lang}
         placeholder="Start typing here..."
         id="react-transliterate-input"
+        useDebounce={useDebounce}
+        className="input"
       />
 
       <div className="spacer" />
 
       <label htmlFor="react-transliterate-textarea">Using textarea</label>
       <ReactTransliterate
-        renderComponent={(props) => <textarea {...props} />}
+        renderComponent={(props) => <textarea className="textarea" {...props} />}
         value={text}
         onChangeText={(text) => {
           setText(text);
@@ -56,6 +75,7 @@ const App = () => {
         lang={lang}
         placeholder="Start typing here..."
         id="react-transliterate-textarea"
+        useDebounce={useDebounce}
       />
 
       <div className="spacer" />
@@ -76,6 +96,7 @@ const App = () => {
           setText(text);
         }}
         lang={lang}
+        useDebounce={useDebounce}
         placeholder="Start typing here..."
         id="react-transliterate-material-ui-input"
       />

@@ -36,8 +36,8 @@ code {
     98% 50% no-repeat #fff;
 }
 
-input,
-textarea {
+.input,
+.textarea {
   width: 100%;
   height: 40px;
   padding: 10px;

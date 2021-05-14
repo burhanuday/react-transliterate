@@ -38,6 +38,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^25.1.4",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^12.12.38",
     "@types/react": "^17.0.4",
     "@types/react-dom": "^16.9.7",
@@ -69,6 +70,7 @@
     "dist"
   ],
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "textarea-caret": "^3.1.0"
   }
 }
