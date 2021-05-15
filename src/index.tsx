@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useRef, useState, useMemo } from "react";
-import getInputSelection, { setCaretPosition } from "./util";
+import { setCaretPosition, getInputSelection, isTouchEnabled } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
 import { ReactTransliterateProps } from "./interfaces/Props";
