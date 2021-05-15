@@ -1,4 +1,4 @@
-export default function (el: HTMLInputElement) {
+export function getInputSelection(el: HTMLInputElement) {
   const start = 0;
   const end = 0;
 

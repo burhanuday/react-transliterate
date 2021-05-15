@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useRef, useState, useMemo } from "react";
-import getInputSelection, { setCaretPosition } from "./util";
+import { setCaretPosition, getInputSelection, isTouchEnabled } from "./util";
 import getCaretCoordinates from "textarea-caret";
 import classes from "./styles.module.css";
 import { ReactTransliterateProps } from "./interfaces/Props";
@@ -95,6 +95,7 @@ export const ReactTransliterate = ({
     onChangeText(newValue);
     onChange(e);
     reset();
+    return inputRef.current?.focus();
   };
 
   const getSuggestions = async (lastWord: string) => {
@@ -228,10 +229,12 @@ export const ReactTransliterate = ({
   const handleBlur = (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (insertCurrentSelectionOnBlur && options[0]) {
-      handleSelection(0);
-    } else {
-      reset();
+    if (!isTouchEnabled()) {
+      if (insertCurrentSelectionOnBlur && options[0]) {
+        handleSelection(0);
+      } else {
+        reset();
+      }
     }
     onBlur(event);
   };
