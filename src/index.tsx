@@ -95,6 +95,7 @@ export const ReactTransliterate = ({
     onChangeText(newValue);
     onChange(e);
     reset();
+    return inputRef.current?.focus();
   };
 
   const getSuggestions = async (lastWord: string) => {
@@ -228,10 +229,12 @@ export const ReactTransliterate = ({
   const handleBlur = (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (insertCurrentSelectionOnBlur && options[0]) {
-      handleSelection(0);
-    } else {
-      reset();
+    if (!isTouchEnabled()) {
+      if (insertCurrentSelectionOnBlur && options[0]) {
+        handleSelection(0);
+      } else {
+        reset();
+      }
     }
     onBlur(event);
   };
