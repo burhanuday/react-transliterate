@@ -99,7 +99,7 @@ export const ReactTransliterate = ({
   };
 
   const getSuggestions = async (lastWord: string) => {
-    if (!shouldRenderSuggestions) {
+    if (!shouldRenderSuggestions || !lastWord) {
       return;
     }
     // fetch suggestion from api
@@ -198,12 +198,28 @@ export const ReactTransliterate = ({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const helperVisible = options.length > 0;
 
+    // const isTouchDevice = isTouchEnabled();
+
+    let keyCode = event.keyCode || event.which;
+
+    const input = inputRef.current;
+
+    if ((keyCode === 229 || keyCode === 0) && input) {
+      // const ss = input.selectionStart! - 1;
+      // const ssv = ss || 0;
+      const char = input.value[input.value?.length - 1];
+      console.log("char", char);
+      console.log(input.value);
+      keyCode = char.charCodeAt(0);
+      console.log(keyCode);
+    }
+
     if (helperVisible) {
-      if (triggerKeys.includes(event.keyCode)) {
+      if (triggerKeys.includes(keyCode)) {
         event.preventDefault();
         handleSelection(selection);
       } else {
-        switch (event.keyCode) {
+        switch (keyCode) {
           case KEY_ESCAPE:
             event.preventDefault();
             reset();
@@ -270,7 +286,7 @@ export const ReactTransliterate = ({
     >
       {renderComponent({
         onChange: handleChange,
-        onKeyDown: handleKeyDown,
+        onKeyUp: handleKeyDown,
         onBlur: handleBlur,
         ref: inputRef,
         value: value,
