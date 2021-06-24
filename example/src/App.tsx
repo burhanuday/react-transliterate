@@ -10,6 +10,8 @@ import "react-transliterate/dist/index.css";
 // Material Ui input component
 import Input from "@material-ui/core/Input";
 
+import debounce from "lodash.debounce";
+
 const App = () => {
   const [text, setText] = useState("");
 
@@ -42,6 +44,7 @@ const App = () => {
         lang={lang}
         placeholder="Start typing here..."
         id="react-transliterate-input"
+        debounceFunction={(fun: (...args: any) => any) => debounce(fun, 3000)}
       />
 
       <div className="spacer" />

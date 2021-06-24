@@ -42,6 +42,7 @@ export const ReactTransliterate = ({
   ],
   insertCurrentSelectionOnBlur = true,
   showCurrentWordAsLastSuggestion = true,
+  debounceFunction,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -124,6 +125,13 @@ export const ReactTransliterate = ({
     }
   };
 
+  const debouncedGetSuggestions = React.useCallback(
+    debounceFunction
+      ? debounceFunction((lastWord: string) => getSuggestions(lastWord))
+      : null,
+    [debounceFunction],
+  );
+
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
 
@@ -161,7 +169,10 @@ export const ReactTransliterate = ({
     const currentWord = value.slice(indexOfLastSpace + 1, caret);
     if (currentWord) {
       // make an api call to fetch suggestions
-      getSuggestions(currentWord);
+
+      debouncedGetSuggestions
+        ? debouncedGetSuggestions(currentWord)
+        : getSuggestions(currentWord);
 
       const rect = input.getBoundingClientRect();
       // console.log("caretPos", caretPos.top);

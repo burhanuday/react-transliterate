@@ -86,4 +86,6 @@ export interface ReactTransliterateProps
    * @type boolean
    */
   showCurrentWordAsLastSuggestion?: boolean;
+
+  debounceFunction?: Function;
 }
