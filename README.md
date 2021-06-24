@@ -10,7 +10,7 @@ Transliteration component for React with support for over 30 languages. Uses API
 
 ## Demo
 
-[See Demo](https://burhanuday.tech/react-transliterate/)
+[See Demo](https://burhanuday.github.io/react-transliterate/)
 
 ## Install
 
