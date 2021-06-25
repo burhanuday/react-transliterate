@@ -6,6 +6,7 @@ import classes from "./styles.module.css";
 import { ReactTransliterateProps } from "./interfaces/Props";
 import { Language } from "./types/Language";
 import { TriggerKeys } from "./constants/TriggerKeys";
+import { getTransliterateSuggestions } from "./util/suggestions-util";
 
 const KEY_UP = 38;
 const KEY_DOWN = 40;
@@ -13,32 +14,6 @@ const KEY_ESCAPE = 27;
 
 const OPTION_LIST_Y_OFFSET = 10;
 const OPTION_LIST_MIN_WIDTH = 100;
-
-export const getSuggestions = async (
-  lastWord: string,
-  numOptions = 5,
-  showCurrentWordAsLastSuggestion = false,
-  lang = "hi",
-) => {
-  // fetch suggestion from api
-  // const url = `https://www.google.com/inputtools/request?ime=transliteration_en_${lang}&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&app=jsapi&text=${lastWord}`;
-
-  const url = `https://inputtools.google.com/request?text=${lastWord}&itc=${lang}-t-i0-und&num=${numOptions}&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data && data[0] === "SUCCESS") {
-      const found = showCurrentWordAsLastSuggestion
-        ? [...data[1][0][1], lastWord]
-        : data[1][0][1];
-      return found;
-    }
-  } catch (e) {
-    // catch error
-    console.error("There was an error with transliteration", e);
-    return [];
-  }
-};
 
 export const ReactTransliterate = ({
   renderComponent = (props) => <input {...props} />,
@@ -135,7 +110,7 @@ export const ReactTransliterate = ({
       ? maxOptions - 1
       : maxOptions;
 
-    const data = await getSuggestions(
+    const data = await getTransliterateSuggestions(
       lastWord,
       numOptions,
       showCurrentWordAsLastSuggestion,
@@ -326,4 +301,4 @@ export const ReactTransliterate = ({
 };
 
 export type { ReactTransliterateProps, Language };
-export { TriggerKeys };
+export { TriggerKeys, getTransliterateSuggestions };

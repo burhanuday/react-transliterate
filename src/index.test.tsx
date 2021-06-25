@@ -1,4 +1,4 @@
-import { ReactTransliterate, getSuggestions } from "./index";
+import { getTransliterateSuggestions, ReactTransliterate } from "./index";
 
 describe("ReactTransliterate", () => {
   it("is truthy", () => {
@@ -7,5 +7,5 @@ describe("ReactTransliterate", () => {
 });
 
 it("returns translate suggestion", () => {
-  expect(getSuggestions("hello")).resolves.toContain("hello");
+  expect(getTransliterateSuggestions("hello")).resolves.toContain("hello");
 });

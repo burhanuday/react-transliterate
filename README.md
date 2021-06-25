@@ -10,7 +10,7 @@ Transliteration component for React with support for over 30 languages. Uses API
 
 ## Demo
 
-[See Demo](https://burhanuday.github.io/react-transliterate/)
+[See Demo](https://burhanuday.tech/react-transliterate/)
 
 ## Install
 
@@ -170,6 +170,19 @@ const App = () => {
 };
 
 export default App;
+```
+
+## Get transliteration suggestions
+
+```jsx
+import { getTransliterateSuggestions } from "react-transliterate";
+
+const data = await getTransliterateSuggestions(
+  word, // word to fetch suggestions for
+  5, // number of suggestions to fetch
+  false, // add the word as the last suggestion
+  "hi", // target language
+);
 ```
 
 For a full example, take a look at the `example` folder
