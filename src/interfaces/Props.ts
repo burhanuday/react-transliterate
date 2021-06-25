@@ -86,4 +86,10 @@ export interface ReactTransliterateProps
    * @type boolean
    */
   showCurrentWordAsLastSuggestion?: boolean;
+
+  /**
+   * Control whether suggestions should be shown
+   * @type boolean
+   */
+  enabled?: boolean;
 }

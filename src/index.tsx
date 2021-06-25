@@ -43,6 +43,7 @@ export const ReactTransliterate = ({
   ],
   insertCurrentSelectionOnBlur = true,
   showCurrentWordAsLastSuggestion = true,
+  enabled = true,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
   const [options, setOptions] = useState<string[]>([]);
@@ -154,7 +155,7 @@ export const ReactTransliterate = ({
 
     // currentWord is the word that is being typed
     const currentWord = value.slice(indexOfLastSpace + 1, caret);
-    if (currentWord) {
+    if (currentWord && enabled) {
       // make an api call to fetch suggestions
       renderSuggestions(currentWord);
 
