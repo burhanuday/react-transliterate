@@ -160,11 +160,6 @@ export const ReactTransliterate = ({
       renderSuggestions(currentWord);
 
       const rect = input.getBoundingClientRect();
-      // console.log("caretPos", caretPos.top);
-      // console.log("rect", rect.height);
-      // console.log("input", input.scrollHeight);
-      // console.log("offset", input.offsetTop, input.scrollHeight);
-
       // get the position of the top left corner of the suggestion box
       // and save it to state
       // const top =
