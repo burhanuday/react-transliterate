@@ -1,11 +1,17 @@
-import { getTransliterateSuggestions, ReactTransliterate } from "./index";
+import * as React from "react";
+import { render } from "@testing-library/react";
+import { ReactTransliterate } from "./index";
 
 describe("ReactTransliterate", () => {
-  it("is truthy", () => {
+  it("is exported", () => {
     expect(ReactTransliterate).toBeTruthy();
   });
-});
 
-it("returns translate suggestion", () => {
-  expect(getTransliterateSuggestions("hello")).resolves.toContain("hello");
+  it("renders without errors", () => {
+    const mockFunction = jest.fn();
+
+    render(
+      <ReactTransliterate value="" onChangeText={mockFunction} lang="hi" />,
+    );
+  });
 });
