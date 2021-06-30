@@ -16,6 +16,8 @@ export const getTransliterateSuggestions = async (
         ? [...data[1][0][1], lastWord]
         : data[1][0][1];
       return found;
+    } else {
+      return [];
     }
   } catch (e) {
     // catch error
