@@ -179,9 +179,11 @@ import { getTransliterateSuggestions } from "react-transliterate";
 
 const data = await getTransliterateSuggestions(
   word, // word to fetch suggestions for
-  5, // number of suggestions to fetch
-  false, // add the word as the last suggestion
-  "hi", // target language
+  {
+    numOptions: 5, // number of suggestions to fetch
+    showCurrentWordAsLastSuggestion: true, // add the word as the last suggestion
+    lang: "hi", // target language
+  },
 );
 ```
 

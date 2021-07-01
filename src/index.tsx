@@ -111,12 +111,11 @@ export const ReactTransliterate = ({
       ? maxOptions - 1
       : maxOptions;
 
-    const data = await getTransliterateSuggestions(
-      lastWord,
+    const data = await getTransliterateSuggestions(lastWord, {
       numOptions,
       showCurrentWordAsLastSuggestion,
       lang,
-    );
+    });
     setOptions(data);
   };
 
