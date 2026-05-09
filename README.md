@@ -183,6 +183,7 @@ const data = await getTransliterateSuggestions(
     numOptions: 5, // number of suggestions to fetch
     showCurrentWordAsLastSuggestion: true, // add the word as the last suggestion
     lang: "hi", // target language
+    punctuationsToBeHandledAtEndOfWord: [",", '"'] // some punctuations may not be properly handled by transliterate pass them here
   },
 );
 ```
@@ -209,6 +210,7 @@ For a full example, take a look at the `example` folder
 | triggerKeys                      |           | `KEY_SPACE, KEY_ENTER, KEY_TAB, KEY_RETURN` | Keys which when pressed, input the current selection to the textbox                                                                  |
 | insertCurrentSelectionOnBlur     |           | `true`                                      | Should the current selection be inserted when `blur` event occurs                                                                    |
 | showCurrentWordAsLastSuggestion  |           | `true`                                      | Show current input as the last option in the suggestion box                                                                          |
+| punctuationsToBeHandledAtEndOfWord  |           | `[',', '"']`                                      | Last punctation mark will be truncated and added back when the user types the punctation                                                                          |
 
 ### Supported Languages
 

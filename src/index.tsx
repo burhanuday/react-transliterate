@@ -39,6 +39,7 @@ export const ReactTransliterate = ({
   ],
   insertCurrentSelectionOnBlur = true,
   showCurrentWordAsLastSuggestion = true,
+  punctuationsToBeHandledAtEndOfWord = [",", '"'],
   enabled = true,
   ...rest
 }: ReactTransliterateProps): JSX.Element => {
@@ -110,6 +111,7 @@ export const ReactTransliterate = ({
       numOptions,
       showCurrentWordAsLastSuggestion,
       lang,
+      punctuationsToBeHandledAtEndOfWord,
     });
     setOptions(data);
   };

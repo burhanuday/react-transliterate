@@ -88,6 +88,13 @@ export interface ReactTransliterateProps
   showCurrentWordAsLastSuggestion?: boolean;
 
   /**
+   * Last punctation mark will be truncated and added back when the user types the punctation
+   * @type string[]
+   */
+  punctuationsToBeHandledAtEndOfWord?: string[];
+
+
+  /**
    * Control whether suggestions should be shown
    * @type boolean
    */
